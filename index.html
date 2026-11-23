@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thomas Bélard, pâtissier-chocolatier</title>
+  <meta name="description" content="Thomas Bélard, pâtissier-chocolatier. Pièces artistiques, peintures en chocolat, desserts à l'assiette. J'enseigne le geste en expliquant le pourquoi.">
+  <meta property="og:title" content="Thomas Bélard, pâtissier-chocolatier">
+  <meta property="og:image" content="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/1683296122970.jpg?w=1200">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Literata:ital,opsz,wght@0,7..72,400..600;1,7..72,400..600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Couleurs : tirées du chocolat lui-même ===== */
+    :root {
+      --cacao: #24160f;        /* chocolat noir tempéré : fonds sombres */
+      --cacao-clair: #3a2418;  /* survol sur fond sombre */
+      --lait: #6b4128;         /* chocolat au lait : bande Transmission */
+      --beurre: #f3e9d8;       /* beurre de cacao : texte sur fond chocolat */
+      --nougatine: #d49a3c;    /* or de la nougatine : le seul accent */
+      --blanc: #ffffff;        /* fond des photos, pour qu'elles ressortent */
+      --encre: #24160f;        /* texte sur fond blanc */
+      --gris: #6e625a;         /* texte secondaire */
+      --mesure: 64ch;          /* longueur de ligne maximale */
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--blanc);
+      color: var(--encre);
+      font-family: "Literata", Georgia, serif;
+      font-size: 1.125rem;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      line-height: 1.05;
+      margin: 0;
+    }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--nougatine); outline-offset: 3px; }
+
+    /* ===== Bilingue : on cache la langue qui n'est pas choisie ===== */
+    html[data-lang="fr"] body [lang="en"],
+    html[data-lang="en"] body [lang="fr"] { display: none !important; }
+
+    /* ===== En-tête ===== */
+    .entete {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: var(--cacao);
+      color: var(--beurre);
+      border-bottom: 1px solid var(--cacao-clair);
+    }
+    .entete-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .signature {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      text-decoration: none;
+      margin-right: auto;
+    }
+    .menu {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 0.95rem;
+    }
+    .menu a { text-decoration: none; opacity: 0.85; }
+    .menu a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+    .langues { display: flex; gap: 0.35rem; }
+    .langues button {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 0.85rem;
+      background: none;
+      color: var(--beurre);
+      border: 1px solid rgba(243, 233, 216, 0.4);
+      padding: 0.2rem 0.55rem;
+      cursor: pointer;
+    }
+    .langues button[aria-pressed="true"] {
+      background: var(--nougatine);
+      border-color: var(--nougatine);
+      color: var(--cacao);
+    }
+    /* Sur téléphone, l'en-tête prend trop de hauteur pour rester collé en haut */
+    @media (max-width: 700px) {
+      .entete { position: static; }
+      .entete-inner { gap: 0.75rem 1.25rem; }
+    }
+
+    /* ===== Accueil : le nom + la courbe de tempérage ===== */
+    .hero {
+      background: var(--cacao);
+      color: var(--beurre);
+      padding: clamp(3rem, 8vw, 6rem) 1.25rem clamp(3rem, 7vw, 5rem);
+    }
+    .hero-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    @media (min-width: 900px) {
+      .hero-inner { grid-template-columns: 5fr 6fr; align-items: end; }
+    }
+    .hero h1 {
+      font-size: clamp(3.2rem, 9vw, 7rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .metier {
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      color: var(--nougatine);
+      margin: 1.25rem 0 0;
+    }
+    .devise {
+      max-width: 30ch;
+      font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+      line-height: 1.5;
+      margin: 1rem 0 0;
+    }
+    .courbe { margin: 0; }
+    .courbe svg { display: block; width: 100%; height: auto; }
+    .courbe .repere { stroke: rgba(243, 233, 216, 0.18); stroke-width: 1; stroke-dasharray: 4 6; }
+    .courbe .trace {
+      fill: none;
+      stroke: var(--nougatine);
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      animation: tracer 2.4s 0.3s ease-out forwards;
+    }
+    @keyframes tracer { to { stroke-dashoffset: 0; } }
+    .courbe .point { fill: var(--cacao); stroke: var(--nougatine); stroke-width: 3; }
+    .courbe .temperature {
+      fill: var(--beurre);
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .etapes {
+      list-style: none;
+      margin: 1.25rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .etapes strong {
+      display: block;
+      font-family: "Bricolage Grotesque", sans-serif;
+      color: var(--nougatine);
+    }
+    .courbe figcaption {
+      margin-top: 1.5rem;
+      max-width: 52ch;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    /* ===== Sections ===== */
+    .section { padding: clamp(3.5rem, 8vw, 6rem) 1.25rem; }
+    .contenu { max-width: 1200px; margin: 0 auto; }
+    .section h2 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .intro { max-width: var(--mesure); margin: 1rem 0 2.5rem; color: var(--gris); }
+
+    /* ===== Portfolio : colonnes façon mosaïque, les photos gardent leur format ===== */
+    .galerie { columns: 3 280px; column-gap: 14px; }
+    .photo {
+      display: block;
+      width: 100%;
+      margin: 0 0 14px;
+      padding: 0;
+      border: 0;
+      background: #efe7dc;
+      cursor: zoom-in;
+      break-inside: avoid;
+    }
+    .photo img { display: block; width: 100%; height: auto; }
+
+    /* ===== À propos + parcours ===== */
+    .apropos { border-top: 1px solid #ece3d6; }
+    .apropos .contenu { display: grid; gap: 3rem; }
+    @media (min-width: 900px) {
+      .apropos .contenu { grid-template-columns: 6fr 5fr; }
+    }
+    .texte h2 { margin-bottom: 1.5rem; }
+    .texte p { max-width: var(--mesure); margin: 0 0 1.2rem; }
+    .colonne-parcours h3 { font-size: 1.3rem; margin: 0 0 1rem; }
+    .parcours, .concours { list-style: none; margin: 0 0 2.5rem; padding: 0; }
+    .parcours { border-left: 2px solid var(--nougatine); }
+    .parcours li { padding: 0 0 1.1rem 1.2rem; line-height: 1.5; }
+    .concours li { padding: 0 0 0.7rem; line-height: 1.5; }
+    .annees {
+      display: block;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--lait);
+    }
+
+    /* ===== Transmission ===== */
+    .transmission { background: var(--lait); color: var(--beurre); }
+    .transmission blockquote {
+      margin: 2rem 0 2.5rem;
+      max-width: 24ch;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-size: clamp(1.6rem, 3.6vw, 2.6rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .transmission p { max-width: var(--mesure); }
+    .faits {
+      list-style: none;
+      margin: 2.5rem 0 0;
+      padding: 0;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      max-width: 1000px;
+    }
+    .faits li { border-top: 2px solid rgba(243, 233, 216, 0.35); padding-top: 0.9rem; line-height: 1.5; }
+
+    /* ===== Contact ===== */
+    .courriel {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.5rem, 4.5vw, 3rem);
+      text-decoration: none;
+      border-bottom: 3px solid var(--nougatine);
+      overflow-wrap: anywhere;
+    }
+    .coordonnees { margin: 2rem 0 0; padding: 0; list-style: none; }
+    .coordonnees li { margin-bottom: 0.4rem; }
+    .bouton-cv {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.3rem;
+      background: var(--cacao);
+      color: var(--beurre);
+      font-family: "Bricolage Grotesque", sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .bouton-cv:hover { background: var(--cacao-clair); }
+
+    .pied {
+      background: var(--cacao);
+      color: var(--beurre);
+      padding: 1.5rem 1.25rem;
+      font-size: 0.9rem;
+    }
+    .pied p { max-width: 1200px; margin: 0 auto; }
+
+    /* ===== Visionneuse de photos ===== */
+    .visionneuse {
+      width: 100vw;
+      height: 100vh;
+      max-width: 100vw;
+      max-height: 100vh;
+      margin: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .visionneuse::backdrop { background: rgba(20, 12, 8, 0.93); }
+    .visionneuse-cadre {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .visionneuse img { max-width: min(86vw, 1400px); max-height: 86vh; object-fit: contain; }
+    .visionneuse button {
+      flex: none;
+      width: 3rem;
+      height: 3rem;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(243, 233, 216, 0.14);
+      color: var(--beurre);
+      font-size: 1.6rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    .visionneuse button:hover { background: rgba(243, 233, 216, 0.28); }
+    .visionneuse .fermer { position: absolute; top: 1rem; right: 1rem; }
+    @media (max-width: 600px) {
+      .visionneuse .precedente, .visionneuse .suivante { position: absolute; bottom: 1.5rem; }
+      .visionneuse .precedente { left: calc(50% - 3.5rem); }
+      .visionneuse .suivante { right: calc(50% - 3.5rem); }
+    }
+
+    /* ===== Mouvement réduit : pas d'animation ===== */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .courbe .trace { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===================== EN-TÊTE ===================== -->
+  <header class="entete">
+    <div class="entete-inner">
+      <a class="signature" href="#">Thomas Bélard</a>
+      <nav class="menu" aria-label="Menu">
+        <a href="#portfolio"><span lang="fr">Portfolio</span><span lang="en">Portfolio</span></a>
+        <a href="#a-propos"><span lang="fr">À propos</span><span lang="en">About</span></a>
+        <a href="#transmission"><span lang="fr">Transmission</span><span lang="en">Teaching</span></a>
+        <a href="#contact"><span lang="fr">Contact</span><span lang="en">Contact</span></a>
+      </nav>
+      <div class="langues">
+        <button type="button" data-choix-langue="fr" aria-pressed="true">FR</button>
+        <button type="button" data-choix-langue="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== ACCUEIL ===================== -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>Thomas Bélard</h1>
+          <p class="metier">
+            <span lang="fr">Pâtissier-chocolatier</span>
+            <span lang="en">Pastry chef &amp; chocolatier</span>
+          </p>
+          <p class="devise">
+            <span lang="fr">J'enseigne le geste en expliquant le pourquoi.</span>
+            <span lang="en">I teach the gesture by explaining the why.</span>
+          </p>
+        </div>
+
+        <!-- La courbe de tempérage du chocolat noir : 50 °C, puis 28 °C, puis 31 °C -->
+        <figure class="courbe">
+          <svg viewBox="0 0 600 240" role="img" aria-labelledby="titre-courbe">
+            <title id="titre-courbe">Courbe de tempérage du chocolat noir : fondre à 50 °C, refroidir à 28 °C, remonter à 31 °C</title>
+            <line class="repere" x1="0" y1="30" x2="600" y2="30"></line>
+            <line class="repere" x1="0" y1="182" x2="600" y2="182"></line>
+            <line class="repere" x1="0" y1="206" x2="600" y2="206"></line>
+            <path class="trace" pathLength="1"
+                  d="M 10 30 L 120 30 C 210 30 250 206 340 206 L 400 206 C 430 206 450 182 480 182 L 590 182"></path>
+            <circle class="point" cx="120" cy="30" r="7"></circle>
+            <circle class="point" cx="340" cy="206" r="7"></circle>
+            <circle class="point" cx="480" cy="182" r="7"></circle>
+            <text class="temperature" x="134" y="22">50 °C</text>
+            <text class="temperature" x="318" y="234">28 °C</text>
+            <text class="temperature" x="462" y="168">31 °C</text>
+          </svg>
+
+          <ol class="etapes">
+            <li>
+              <strong lang="fr">Fondre à 50 °C</strong>
+              <strong lang="en">Melt at 50 °C</strong>
+              <span lang="fr">On efface tous les cristaux du beurre de cacao.</span>
+              <span lang="en">Every cocoa butter crystal is erased.</span>
+            </li>
+            <li>
+              <strong lang="fr">Refroidir à 28 °C</strong>
+              <strong lang="en">Cool to 28 °C</strong>
+              <span lang="fr">Les cristaux se forment, les bons comme les mauvais.</span>
+              <span lang="en">Crystals form, the good ones and the bad ones.</span>
+            </li>
+            <li>
+              <strong lang="fr">Remonter à 31 °C</strong>
+              <strong lang="en">Warm to 31 °C</strong>
+              <span lang="fr">Les instables refondent, seuls les stables restent : brillant, cassant, net.</span>
+              <span lang="en">The unstable ones melt again, only the stable ones remain: glossy, snappy, clean.</span>
+            </li>
+          </ol>
+
+          <figcaption>
+            <span lang="fr">Le tempérage du chocolat noir, en une courbe. C'est ainsi que j'enseigne : le geste d'abord, puis le pourquoi.</span>
+            <span lang="en">Tempering dark chocolate, in one curve. This is how I teach: the gesture first, then the why.</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ===================== PORTFOLIO ===================== -->
+    <!-- Pour retirer une photo : supprime sa ligne. Pour changer l'ordre : déplace les lignes.
+         Chaque photo : src = miniature (?w=700), data-full = grande version (?w=1600). -->
+    <section class="section" id="portfolio">
+      <div class="contenu">
+        <h2>Portfolio</h2>
+        <p class="intro">
+          <span lang="fr">Pièces artistiques, peintures en chocolat, desserts à l'assiette et pâtisserie. Cliquez sur une photo pour l'agrandir.</span>
+          <span lang="en">Artistic pieces, chocolate paintings, plated desserts and pastry. Click a photo to enlarge it.</span>
+        </p>
+
+        <div class="galerie">
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/1683296122970.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/1683296122970.jpg?w=700" alt="Création de Thomas Bélard, photo 1" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/fb_img_1549628669620.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/fb_img_1549628669620.jpg?w=700" alt="Création de Thomas Bélard, photo 2" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/fb_img_1549628787095.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/fb_img_1549628787095.jpg?w=700" alt="Création de Thomas Bélard, photo 3" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890235124.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890235124.jpg?w=700" alt="Création de Thomas Bélard, photo 4" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/frefrs.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/frefrs.jpg?w=700" alt="Création de Thomas Bélard, photo 5" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/04/fb_img_1550944385700.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/04/fb_img_1550944385700.jpg?w=700" alt="Création de Thomas Bélard, photo 6" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890716617-1.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890716617-1.jpg?w=700" alt="Création de Thomas Bélard, photo 7" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890716617.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/fb_img_1500890716617.jpg?w=700" alt="Création de Thomas Bélard, photo 8" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/capturepiece.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/capturepiece.jpg?w=700" alt="Pièce artistique de Thomas Bélard" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/1509007_327400074129702_8255126688143869856_n.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/1509007_327400074129702_8255126688143869856_n.jpg?w=700" alt="Création de Thomas Bélard, photo 10" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/14100548_622683984601308_2421779810175714669_n.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/14100548_622683984601308_2421779810175714669_n.jpg?w=700" alt="Création de Thomas Bélard, photo 11" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/les-patisseries-d-opera.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/les-patisseries-d-opera.jpg?w=700" alt="Pâtisseries de Thomas Bélard" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/104419348_919513045188331_1318423300875687720_n.jpg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/05/104419348_919513045188331_1318423300875687720_n.jpg?w=700" alt="Création de Thomas Bélard, photo 13" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-16-at-12.34.50.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-16-at-12.34.50.jpeg?w=700" alt="Création de Thomas Bélard, photo 14" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/tgbgfbg.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/tgbgfbg.jpeg?w=700" alt="Création de Thomas Bélard, photo 15" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-24-at-14.57.48-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-24-at-14.57.48-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 16" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-24-at-14.57.48.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-24-at-14.57.48.jpeg?w=700" alt="Création de Thomas Bélard, photo 17" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-16-at-12.34.50-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/01/whatsapp-image-2023-08-16-at-12.34.50-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 18" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/08/whatsapp-image-2023-08-24-at-14.57.47.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2023/08/whatsapp-image-2023-08-24-at-14.57.47.jpeg?w=700" alt="Création de Thomas Bélard, photo 19" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.11-edited.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.11-edited.jpeg?w=700" alt="Création de Thomas Bélard, photo 20" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-13-edited.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-13-edited.jpeg?w=700" alt="Création de Thomas Bélard, photo 21" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.10-4-edited-2.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.10-4-edited-2.jpeg?w=700" alt="Création de Thomas Bélard, photo 22" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-3-edited.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-3-edited.jpeg?w=700" alt="Création de Thomas Bélard, photo 23" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-10-edited-2.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-10-edited-2.jpeg?w=700" alt="Création de Thomas Bélard, photo 24" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-8-edited-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-8-edited-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 25" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.13-1-edited-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.13-1-edited-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 26" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-11.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-11.jpeg?w=700" alt="Création de Thomas Bélard, photo 27" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-12.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.09-12.jpeg?w=700" alt="Création de Thomas Bélard, photo 28" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2024-03-30-at-11.16.51-edited-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2024-03-30-at-11.16.51-edited-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 29" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/03/whatsapp-image-2024-03-30-at-11.16.55-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/03/whatsapp-image-2024-03-30-at-11.16.55-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 30" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/03/4.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2024/03/4.jpeg?w=700" alt="Création de Thomas Bélard, photo 31" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.14.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.14.jpeg?w=700" alt="Création de Thomas Bélard, photo 32" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.12.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.12.jpeg?w=700" alt="Création de Thomas Bélard, photo 33" loading="lazy"></button>
+          <button class="photo" type="button" data-full="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.10-1.jpeg?w=1600"><img src="https://thomasbelardpatissier.wordpress.com/wp-content/uploads/2026/08/whatsapp-image-2026-03-26-at-16.56.10-1.jpeg?w=700" alt="Création de Thomas Bélard, photo 34" loading="lazy"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== À PROPOS ===================== -->
+    <section class="section apropos" id="a-propos">
+      <div class="contenu">
+        <div class="texte">
+          <h2><span lang="fr">À propos</span><span lang="en">About</span></h2>
+          <p lang="fr">Fils de pâtissier-chocolatier, j'ai trempé mes premières langues de chat et mes premiers pralinés à 8 ans. Titulaire de deux CAP (pâtissier et chocolatier) et d'une mention complémentaire pâtisserie, j'ai travaillé des laboratoires artisanaux bordelais aux hôtels 5 étoiles suisses.</p>
+          <p lang="fr">J'ai été chef pâtissier d'une brigade de quatre au Fournil de Napoléon, à Pessac, puis j'ai rejoint le W Verbier et l'hôtel Les Trois Rois, à Bâle. Mes domaines de prédilection : les pièces artistiques, les peintures en chocolat et les desserts à l'assiette.</p>
+          <p lang="en">Son of a pastry chef and chocolatier, I dipped my first langues de chat and pralines at 8. Trained in France with two CAP diplomas (pastry and chocolate) and an advanced pastry certificate, I have worked from Bordeaux artisan workshops to Swiss 5-star hotels.</p>
+          <p lang="en">I led a team of four as head pastry chef at Le Fournil de Napoléon in Pessac, then joined W Verbier and Les Trois Rois in Basel. What I love most: artistic pieces, chocolate paintings and plated desserts.</p>
+        </div>
+
+        <div class="colonne-parcours">
+          <h3><span lang="fr">Parcours</span><span lang="en">Career</span></h3>
+          <ol class="parcours">
+            <li>
+              <span class="annees"><span lang="fr">Aujourd'hui</span><span lang="en">Today</span></span>
+              <span lang="fr">Pâtissier, Schloss Bottmingen (CDD)</span>
+              <span lang="en">Pastry chef, Schloss Bottmingen (fixed-term)</span>
+            </li>
+            <li>
+              <span class="annees">2024 – 2025</span>
+              <span lang="fr">Chef de partie pâtisserie, hôtel Les Trois Rois 5*, Bâle</span>
+              <span lang="en">Pastry chef de partie, Les Trois Rois 5*, Basel</span>
+            </li>
+            <li>
+              <span class="annees">2023 – 2024</span>
+              <span lang="fr">Pâtissier, W Verbier 5* (Marriott)</span>
+              <span lang="en">Pastry cook, W Verbier 5* (Marriott)</span>
+            </li>
+            <li>
+              <span class="annees">2019 – 2020</span>
+              <span lang="fr">Pâtissier-chocolatier, Des pains qui parlent</span>
+              <span lang="en">Pastry chef &amp; chocolatier, Des pains qui parlent</span>
+            </li>
+            <li>
+              <span class="annees">2018 – 2019</span>
+              <span lang="fr">Chef pâtissier, Le Fournil de Napoléon, Pessac</span>
+              <span lang="en">Head pastry chef, Le Fournil de Napoléon, Pessac</span>
+            </li>
+            <li>
+              <span class="annees">2012 – 2018</span>
+              <span lang="fr">Pâtissier-chocolatier, La Marmotte, Le Pian-Médoc (dont apprentissage)</span>
+              <span lang="en">Pastry chef &amp; chocolatier, La Marmotte, Le Pian-Médoc (including apprenticeship)</span>
+            </li>
+          </ol>
+
+          <h3><span lang="fr">Concours</span><span lang="en">Competitions</span></h3>
+          <ul class="concours">
+            <li><span lang="fr">Kiwanis Cup, 1re place (2014)</span><span lang="en">Kiwanis Cup, 1st place (2014)</span></li>
+            <li><span lang="fr">Concours des Jardins botaniques de Bordeaux, 2e place</span><span lang="en">Bordeaux Botanical Gardens competition, 2nd place</span></li>
+            <li><span lang="fr">Coupe Criollo, 4e place (2017)</span><span lang="en">Criollo Cup, 4th place (2017)</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TRANSMISSION ===================== -->
+    <section class="section transmission" id="transmission">
+      <div class="contenu">
+        <h2><span lang="fr">Transmission</span><span lang="en">Teaching</span></h2>
+        <blockquote>
+          <span lang="fr">Transmettre le savoir n'enlève rien à l'enseignant et donne à l'apprenant.</span>
+          <span lang="en">Sharing knowledge takes nothing from the teacher and gives to the learner.</span>
+        </blockquote>
+        <p lang="fr">Pour moi, enseigner, c'est d'abord expliquer le pourquoi : quel problème on essaie de résoudre, et ce que va apporter la solution. Quand on comprend le mécanisme, le geste devient reproductible.</p>
+        <p lang="en">To me, teaching starts with the why: what problem are we solving, and what will the solution bring. Once you understand the mechanism, the gesture becomes repeatable.</p>
+
+        <ul class="faits">
+          <li>
+            <span lang="fr">Un apprenti chocolatier formé pendant deux ans.</span>
+            <span lang="en">One apprentice chocolatier trained over two years.</span>
+          </li>
+          <li>
+            <span lang="fr">Des masterclass sur le chocolat, en anglais, dans des hôtels au Monténégro.</span>
+            <span lang="en">Chocolate masterclasses, taught in English, in hotels in Montenegro.</span>
+          </li>
+          <li>
+            <span lang="fr">Mon premier cours, à 7 ans, dans la cour de récréation : apprendre à dessiner des mangas.</span>
+            <span lang="en">My first lesson, at 7, in the schoolyard: how to draw manga.</span>
+          </li>
+        </ul>
+
+        <!-- Vidéo à ajouter plus tard : décommente et remplace ID_VIDEO par l'identifiant YouTube
+        <div style="margin-top:3rem; max-width:800px; aspect-ratio:16/9;">
+          <iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/ID_VIDEO" title="Vidéo pédagogique" allowfullscreen></iframe>
+        </div>
+        -->
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT ===================== -->
+    <section class="section" id="contact">
+      <div class="contenu">
+        <h2>Contact</h2>
+        <a class="courriel" href="mailto:thomasbelard@gmail.com">thomasbelard@gmail.com</a>
+        <ul class="coordonnees">
+          <li><span lang="fr">Téléphone</span><span lang="en">Phone</span> : <a href="tel:+33632594727">+33 6 32 59 47 27</a></li>
+          <li><span lang="fr">Basé à Mulhouse, disponible en Suisse (permis G)</span><span lang="en">Based in Mulhouse, available in Switzerland (G permit)</span></li>
+          <li><span lang="fr">Français, anglais, espagnol, bases d'allemand</span><span lang="en">French, English, Spanish, basic German</span></li>
+        </ul>
+        <!-- Mets ton CV en PDF dans le même dossier que ce fichier, sous le nom cv.pdf -->
+        <a class="bouton-cv" href="cv.pdf" download>
+          <span lang="fr">Télécharger mon CV (PDF)</span>
+          <span lang="en">Download my CV (PDF)</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pied">
+    <p>© 2026 Thomas Bélard</p>
+  </footer>
+
+  <!-- ===================== VISIONNEUSE DE PHOTOS ===================== -->
+  <dialog class="visionneuse" id="visionneuse" aria-label="Visionneuse de photos">
+    <div class="visionneuse-cadre">
+      <button class="precedente" type="button" id="photo-precedente" aria-label="Photo précédente">‹</button>
+      <img id="visionneuse-image" src="" alt="">
+      <button class="suivante" type="button" id="photo-suivante" aria-label="Photo suivante">›</button>
+      <button class="fermer" type="button" id="visionneuse-fermer" aria-label="Fermer">×</button>
+    </div>
+  </dialog>
+
+  <script>
+    // ----- Choix de la langue (FR / EN) -----
+    // Le CSS cache tous les éléments dont l'attribut lang n'est pas la langue choisie.
+    const boutonsLangue = document.querySelectorAll("[data-choix-langue]");
+
+    function choisirLangue(langue) {
+      document.documentElement.dataset.lang = langue;
+      document.documentElement.lang = langue;
+      boutonsLangue.forEach(function (bouton) {
+        const estChoisi = bouton.dataset.choixLangue === langue;
+        bouton.setAttribute("aria-pressed", estChoisi ? "true" : "false");
+      });
+    }
+
+    boutonsLangue.forEach(function (bouton) {
+      bouton.addEventListener("click", function () {
+        choisirLangue(bouton.dataset.choixLangue);
+      });
+    });
+
+    // ----- Visionneuse de photos -----
+    const photos = Array.from(document.querySelectorAll(".photo"));
+    const visionneuse = document.getElementById("visionneuse");
+    const grandeImage = document.getElementById("visionneuse-image");
+    let indexActuel = 0;
+
+    function afficherPhoto(index) {
+      // Le modulo fait boucler : après la dernière photo, on revient à la première.
+      indexActuel = (index + photos.length) % photos.length;
+      const photo = photos[indexActuel];
+      grandeImage.src = photo.dataset.full;
+      grandeImage.alt = photo.querySelector("img").alt;
+    }
+
+    photos.forEach(function (photo, index) {
+      photo.addEventListener("click", function () {
+        afficherPhoto(index);
+        visionneuse.showModal();
+      });
+    });
+
+    document.getElementById("photo-precedente").addEventListener("click", function () {
+      afficherPhoto(indexActuel - 1);
+    });
+    document.getElementById("photo-suivante").addEventListener("click", function () {
+      afficherPhoto(indexActuel + 1);
+    });
+    document.getElementById("visionneuse-fermer").addEventListener("click", function () {
+      visionneuse.close();
+    });
+
+    // Flèches du clavier pour naviguer (Échap ferme déjà la fenêtre tout seul).
+    visionneuse.addEventListener("keydown", function (evenement) {
+      if (evenement.key === "ArrowLeft") { afficherPhoto(indexActuel - 1); }
+      if (evenement.key === "ArrowRight") { afficherPhoto(indexActuel + 1); }
+    });
+
+    // Un clic à côté de la photo ferme la visionneuse.
+    visionneuse.addEventListener("click", function (evenement) {
+      const clicDansLeVide = evenement.target === visionneuse
+        || evenement.target.classList.contains("visionneuse-cadre");
+      if (clicDansLeVide) { visionneuse.close(); }
+    });
+  </script>
+</body>
+</html>
